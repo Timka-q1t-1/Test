@@ -1,1 +1,634 @@
-local a={}local b=game:GetService('UserInputService')local c=game:GetService('RunService')local d=game:GetService('TweenService')local e=game:GetService('Players').LocalPlayer.PlayerGui;local f={Black=Color3.fromRGB(0,0,0),DarkGray=Color3.fromRGB(40,40,40),Gray=Color3.fromRGB(80,80,80),LightGray=Color3.fromRGB(120,120,120),White=Color3.fromRGB(255,255,255)}local g={TextLabel={FontFace=Font.new("rbxassetid://12187374537",Enum.FontWeight.Regular,Enum.FontStyle.Normal),BackgroundColor3=f.Gray,BackgroundTransparency=0.5,BorderSizePixel=0,TextColor3=f.White,TextStrokeColor3=f.Black,TextScaled=true,TextStrokeTransparency=0,},TextButton={FontFace=Font.new("rbxassetid://12187374537",Enum.FontWeight.Regular,Enum.FontStyle.Normal),BackgroundColor3=f.Gray,BackgroundTransparency=0.75,BorderSizePixel=0,TextColor3=f.White,TextStrokeColor3=f.Black,TextScaled=true,TextStrokeTransparency=0,},Frame={BackgroundColor3=f.DarkGray,BackgroundTransparency=0.45,BorderSizePixel=0,},ImageLabel={BackgroundTransparency=1,BorderSizePixel=0,ImageColor3=f.DarkGray,ImageTransparency=0.15},ScrollingFrame={BackgroundColor3=f.DarkGray,BackgroundTransparency=1,BorderSizePixel=0,ScrollBarThickness=0,CanvasSize=UDim2.new(0,0,0,0),AutomaticCanvasSize=Enum.AutomaticSize.XY,},TextBox={FontFace=Font.new("rbxassetid://12187374537",Enum.FontWeight.Regular,Enum.FontStyle.Normal),BackgroundColor3=f.Gray,BackgroundTransparency=0.5,BorderSizePixel=0,TextColor3=f.White,TextStrokeColor3=f.Black,TextScaled=true,PlaceholderText="Enter...",ClearTextOnFocus=false}}local function h(i)local j=Instance.new('UICorner')j.CornerRadius=UDim.new(0,5)j.Parent=i;return j end;local function k(i)local l=Instance.new('UIStroke')l.Color=Color3.fromRGB(255,255,255)l.ApplyStrokeMode=Enum.ApplyStrokeMode.Border;l.Parent=i;return l end;local function m(i)local n=Instance.new('UIListLayout')n.Padding=UDim.new(0,3)n.SortOrder=Enum.SortOrder.LayoutOrder;n.Parent=i;return n end;local function o(i,p)local q=Instance.new('UIPadding')q.PaddingTop=UDim.new(0,p)q.PaddingLeft=UDim.new(0,p)q.PaddingRight=UDim.new(0,p)q.PaddingBottom=UDim.new(0,p)q.Parent=i;return q end;local function r(s,t)local u=g[t]if not u then return end;for v,w in pairs(u)do if pcall(function()return s[v]end)then s[v]=w end end end;function a.Hub(x)local y=true;local z=b.MouseIconEnabled;if not e:FindFirstChild(x..'_'..game:GetService('Players').LocalPlayer.UserId)then local A=Instance.new('ScreenGui',e)A.Name=x..'_'..game:GetService('Players').LocalPlayer.UserId)A.IgnoreGuiInset=true;A.ResetOnSpawn=false;A.DisplayOrder=math.huge-1;local B=Instance.new('TextButton',A)B.Position=UDim2.new(0,0,0,0)B.Size=UDim2.new(0,0,0,0)B.Active=true;B.Modal=true;B.MaxVisibleGraphemes=0;local C=Instance.new('TextButton',A)C.Position=UDim2.new(0.5,0,0,0)C.Size=UDim2.new(0,40,0,40)C.Active=true;C.Draggable=true;C.MaxVisibleGraphemes=0;C.Visible=false;local D=Instance.new('ImageLabel',A)D.Position=UDim2.new(0.296,0,0.053,0)D.Size=UDim2.new(0,300,0,350)D.Image='rbxassetid://96488463895972'D.Active=true;D.Draggable=true;local E=Instance.new('Frame',D)E.Size=UDim2.new(0,300,0,30)E.BackgroundTransparency=1;local F=Instance.new('TextButton',E)F.Position=UDim2.new(0.9,0,0,0)F.Size=UDim2.new(0,30,0,30)F.FontFace.Bold=true;F.Text='X'local G=Instance.new('TextLabel',E)G.Position=UDim2.new(0.02,0,0,0)G.Size=UDim2.new(0,200,0,30)G.TextXAlignment=Enum.TextXAlignment.Left;G.Text=x;local H=Instance.new('ScrollingFrame',D)H.Position=UDim2.new(0,0,0.086,0)H.Size=UDim2.new(0,300,0,45)o(H,3)local I=Instance.new('Folder',D)r(D,D.ClassName)r(G,G.ClassName)r(F,F.ClassName)r(C,C.ClassName)r(H,H.ClassName)G.BackgroundTransparency=1;F.BackgroundTransparency=1;H.AutomaticCanvasSize=Enum.AutomaticSize.X;H.ScrollingDirection=Enum.ScrollingDirection.X;local J=m(H)J.FillDirection=Enum.FillDirection.Horizontal;J.ItemLineAlignment=Enum.ItemLineAlignment.Center;J.VerticalAlignment=Enum.VerticalAlignment.Center;h(D)h(F)h(C).CornerRadius=UDim.new(0,999)h(E)k(D)k(F)k(C)k(E)local function K()y=not y;D.Visible=y;C.Visible=not y;B.Visible=y;if z==true then return end;print(1)b.MouseIconEnabled=y end;C.MouseButton1Click:Connect(K)F.MouseButton1Click:Connect(K)b.InputBegan:Connect(function(L,M)if M then return end;if L.KeyCode==Enum.KeyCode.K then K()end end)local N={}function N.Section(O,P)if P==nil then P=f.Gray end;local Q=0;local R=Instance.new('TextButton',H)R.Size=UDim2.new(0,45,0,45)R.Text=O;local S=Instance.new('ScrollingFrame',I)S.Position=UDim2.new(0,0,0.231,0)S.Size=UDim2.new(0,300,0,260)S.Visible=false;r(R,R.ClassName)r(S,S.ClassName)local T=m(S)T.FillDirection=Enum.FillDirection.Vertical;o(S,2)R.BackgroundColor3=P;S.AutomaticCanvasSize=Enum.AutomaticSize.Y;S.ScrollingDirection=Enum.ScrollingDirection.Y;h(R)R.MouseButton1Click:Connect(function()for U,V in pairs(I:GetChildren())do if V~=S then V.Visible=false end end;S.Visible=not S.Visible end)local W={}function W.Title(O)Q=Q+1;local X=Instance.new('TextLabel',S)X.Size=UDim2.new(0,300,0,20)X.Text=O;X.LayoutOrder=Q;r(X,X.ClassName)h(X)end;function W.Active(O,Y)Q=Q+1;local Z=Instance.new('TextButton',S)Z.Size=UDim2.new(0,300,0,45)Z.LayoutOrder=Q;Z.MaxVisibleGraphemes=0;local _=Instance.new('Frame',Z)_.Size=UDim2.new(0,15,0,15)_.Position=UDim2.new(0.950,0,0,0)local a0=Instance.new('TextLabel',Z)a0.Size=UDim2.new(0,175,0,35)a0.Position=UDim2.new(0.014,0,0.111,0)a0.Text=O;a0.TextXAlignment=Enum.TextXAlignment.Left;r(Z,Z.ClassName)r(_,a0.ClassName)r(a0,a0.ClassName)h(Z)h(_)_.BackgroundColor3=Color3.fromRGB(255,0,0)a0.BackgroundTransparency=1;local a1,a2=pcall(function()Z.MouseButton1Click:Connect(function()d:Create(_,TweenInfo.new(0.15),{BackgroundColor3=Color3.fromRGB(85,255,0)}):Play()Y()wait(0.15)d:Create(_,TweenInfo.new(0.15),{BackgroundColor3=Color3.fromRGB(255,0,0)}):Play()end)end)end;function W.Toggle(O,Y)Q=Q+1;local a3=Instance.new('TextButton',S)a3.Size=UDim2.new(0,300,0,45)a3.LayoutOrder=Q;a3.MaxVisibleGraphemes=0;local a4=Instance.new('Frame',a3)a4.Size=UDim2.new(0,15,0,15)a4.Position=UDim2.new(0.950,0,0,0)local a5=Instance.new('TextLabel',a3)a5.Size=UDim2.new(0,175,0,35)a5.Position=UDim2.new(0.014,0,0.111,0)a5.Text=O;a5.TextXAlignment=Enum.TextXAlignment.Left;r(a3,a3.ClassName)r(a4,a5.ClassName)r(a5,a5.ClassName)h(a3)h(a4)a4.BackgroundColor3=Color3.fromRGB(255,0,0)a5.BackgroundTransparency=1;local a6=false;local a7=nil;local a8,a9=pcall(function()a3.MouseButton1Click:Connect(function()if a7 then a7:Disconnect()a7=nil;a6=false;Y(a6)d:Create(a4,TweenInfo.new(0.25),{BackgroundColor3=Color3.fromRGB(255,0,0)}):Play()return end;local aa,ab=pcall(function()a6=true;a7=c.Heartbeat:Connect(function()Y(a6)end)d:Create(a4,TweenInfo.new(0.25),{BackgroundColor3=Color3.fromRGB(85,255,0)}):Play()end)if not aa then warn("Failed to connect:",ab)end end)end)end;function W.ActiveB(O,Y)Q=Q+1;local ac=Instance.new('TextButton',S)ac.Size=UDim2.new(0,300,0,45)ac.LayoutOrder=Q;ac.MaxVisibleGraphemes=0;local ad=Instance.new('Frame',ac)ad.Size=UDim2.new(0,15,0,15)ad.Position=UDim2.new(0.950,0,0,0)local ae=Instance.new('TextBox',ac)ae.Size=UDim2.new(0,90,0,35)ae.Position=UDim2.new(0.625,0,0.111,0)ae.Text=''local af=Instance.new('TextLabel',ac)af.Size=UDim2.new(0,175,0,35)af.Position=UDim2.new(0.014,0,0.111,0)af.Text=O;af.TextXAlignment=Enum.TextXAlignment.Left;r(ac,ac.ClassName)r(ad,af.ClassName)r(ae,ae.ClassName)r(af,af.ClassName)h(ac)h(ae)h(ad)ad.BackgroundColor3=Color3.fromRGB(255,0,0)af.BackgroundTransparency=1;local ag,ah=pcall(function()ac.MouseButton1Click:Connect(function()if ae.Text==''then return end;d:Create(ad,TweenInfo.new(0.15),{BackgroundColor3=Color3.fromRGB(85,255,0)}):Play()Y(Y(ae.Text))wait(0.15)d:Create(ad,TweenInfo.new(0.15),{BackgroundColor3=Color3.fromRGB(255,0,0)}):Play()end)end)end;function W.ToggleB(O,Y)Q=Q+1;local ai=Instance.new('TextButton',S)ai.Size=UDim2.new(0,300,0,45)ai.LayoutOrder=Q;ai.MaxVisibleGraphemes=0;local aj=Instance.new('Frame',ai)aj.Size=UDim2.new(0,15,0,15)aj.Position=UDim2.new(0.950,0,0,0)local ak=Instance.new('TextBox',ai)ak.Size=UDim2.new(0,90,0,35)ak.Position=UDim2.new(0.625,0,0.111,0)ak.Text=''local al=Instance.new('TextLabel',ai)al.Size=UDim2.new(0,175,0,35)al.Position=UDim2.new(0.014,0,0.111,0)al.Text=O;al.TextXAlignment=Enum.TextXAlignment.Left;r(ai,ai.ClassName)r(aj,al.ClassName)r(ak,ak.ClassName)r(al,al.ClassName)h(ai)h(ak)h(aj)aj.BackgroundColor3=Color3.fromRGB(255,0,0)al.BackgroundTransparency=1;local am=false;local an=nil;local ao,ap=pcall(function()ai.MouseButton1Click:Connect(function()if ak.Text==''then return end;if an then an:Disconnect()an=nil;am=false;Y(am)d:Create(aj,TweenInfo.new(0.25),{BackgroundColor3=Color3.fromRGB(255,0,0)}):Play()return end;local aq,ar=pcall(function()am=true;an=c.Heartbeat:Connect(function()Y(am,ak.Text)end)d:Create(aj,TweenInfo.new(0.25),{BackgroundColor3=Color3.fromRGB(85,255,0)}):Play()end)if not aq then warn("Failed to connect:",ar)end end)end)end;function W.BindActive(O,Y)Q=Q+1;local as=nil;local at=Instance.new('TextButton',S)at.Size=UDim2.new(0,300,0,45)at.LayoutOrder=Q;at.MaxVisibleGraphemes=0;local au=Instance.new('Frame',at)au.Size=UDim2.new(0,15,0,15)au.Position=UDim2.new(0.950,0,0,0)local av=Instance.new('TextLabel',at)av.Size=UDim2.new(0,50,0,35)av.Position=UDim2.new(0.692,0,0.111,0)av.Text='...'local aw=Instance.new('TextLabel',at)aw.Size=UDim2.new(0,175,0,35)aw.Position=UDim2.new(0.014,0,0.111,0)aw.Text=O;aw.TextXAlignment=Enum.TextXAlignment.Left;r(at,at.ClassName)r(au,aw.ClassName)r(av,av.ClassName)r(aw,aw.ClassName)h(at)h(av)h(au)au.BackgroundColor3=Color3.fromRGB(255,0,0)aw.BackgroundTransparency=1;local ax,ay=pcall(function()at.MouseButton1Click:Connect(function()if not as then d:Create(au,TweenInfo.new(0.25),{BackgroundColor3=Color3.fromRGB(85,255,0)}):Play()av.Text="Press key..."local az;az=b.InputBegan:Connect(function(aA,aB)if aB then return end;if az then az:Disconnect()az=nil end;as=aA.KeyCode;av.Text=as.Name end)else as=nil;av.Text='...'d:Create(au,TweenInfo.new(0.25),{BackgroundColor3=Color3.fromRGB(255,0,0)}):Play()end end)b.InputBegan:Connect(function(aA,aB)if aB or not as or aA.KeyCode~=as then return end;Y()end)end)end;function W.BindToggle(O,Y)Q=Q+1;local aC=nil;local aD=false;local aE=nil;local aF=false;local aG=Instance.new('TextButton',S)aG.Size=UDim2.new(0,300,0,45)aG.LayoutOrder=Q;aG.AutoButtonColor=false;aG.Text=""local aH=Instance.new('Frame',aG)aH.Size=UDim2.new(0,15,0,15)aH.Position=UDim2.new(0.950,0,0,0)local aI=Instance.new('TextLabel',aG)aI.Size=UDim2.new(0,50,0,35)aI.Position=UDim2.new(0.692,0,0.111,0)aI.Text='...'aI.TextSize=12;aI.BackgroundTransparency=0.8;local aJ=Instance.new('TextLabel',aG)aJ.Size=UDim2.new(0,175,0,35)aJ.Position=UDim2.new(0.014,0,0.111,0)aJ.Text=O;aJ.TextXAlignment=Enum.TextXAlignment.Left;r(aG,aG.ClassName)r(aH,aJ.ClassName)r(aI,aI.ClassName)r(aJ,aJ.ClassName)h(aG)h(aI)h(aH)aH.BackgroundColor3=Color3.fromRGB(255,0,0)aJ.BackgroundTransparency=1;local function aK()aF=not aF;if aF then d:Create(aH,TweenInfo.new(0.2),{BackgroundColor3=Color3.fromRGB(0,255,0)}):Play()aE=c.Heartbeat:Connect(function()Y(true)end)else d:Create(aH,TweenInfo.new(0.2),{BackgroundColor3=Color3.fromRGB(255,0,0)}):Play()aI.Text=aC and aC.Name or'...'if aE then aE:Disconnect()aE=nil end;Y(false)end end;aG.MouseButton1Click:Connect(function()if not aC then aI.Text="Press key..."local aL;aL=b.InputBegan:Connect(function(aA,aB)if aB then return end;aC=aA.KeyCode;aI.Text=aC.Name;if aL then aL:Disconnect()end end)else aC=nil;aI.Text='...'if aF then aK()end end end)b.InputBegan:Connect(function(aA,aB)if aB or not aC or aA.KeyCode~=aC then return end;aK()end)end;return W end;return N else e:FindFirstChild(x..'_'..game:GetService('Players').LocalPlayer.UserId):Destroy()return a.Hub(x)end end;return a
+local CHEAT = {}
+
+local userInputService = game:GetService('UserInputService')
+local runService = game:GetService('RunService')
+local tweenService = game:GetService('TweenService')
+local coreGui = game:GetService('CoreGui')
+
+local colors = {
+	Black = Color3.fromRGB(0, 0, 0),
+	DarkGray = Color3.fromRGB(40, 40, 40),
+	Gray = Color3.fromRGB(80, 80, 80),
+	LightGray = Color3.fromRGB(120, 120, 120),
+	White = Color3.fromRGB(255, 255, 255)
+}
+
+local themes = {
+	TextLabel = {
+		FontFace = Font.new("rbxassetid://12187374537", Enum.FontWeight.Regular, Enum.FontStyle.Normal),
+		BackgroundColor3 = colors.Gray,
+		BackgroundTransparency = 0.5,
+		BorderSizePixel = 0,
+		TextColor3 = colors.White,
+		TextStrokeColor3 = colors.Black,
+		TextScaled = true,
+		TextStrokeTransparency = 0,
+	},
+	TextButton = {
+		FontFace = Font.new("rbxassetid://12187374537", Enum.FontWeight.Regular, Enum.FontStyle.Normal),
+		BackgroundColor3 = colors.Gray,
+		BackgroundTransparency = 0.75,
+		BorderSizePixel = 0,
+		TextColor3 = colors.White,
+		TextStrokeColor3 = colors.Black,
+		TextScaled = true,
+		TextStrokeTransparency = 0,
+	},
+	Frame = {
+		BackgroundColor3 = colors.DarkGray,
+		BackgroundTransparency = 0.45,
+		BorderSizePixel = 0,
+	},
+	ImageLabel = {
+		BackgroundTransparency = 1,
+		BorderSizePixel = 0,
+		ImageColor3 = colors.DarkGray,
+		ImageTransparency = 0.15
+	},
+	ScrollingFrame = {
+		BackgroundColor3 = colors.DarkGray,
+		BackgroundTransparency = 1,
+		BorderSizePixel = 0,
+		ScrollBarThickness = 0,
+		CanvasSize = UDim2.new(0, 0, 0, 0),
+		AutomaticCanvasSize = Enum.AutomaticSize.XY,
+	},
+	TextBox = {
+		FontFace = Font.new("rbxassetid://12187374537", Enum.FontWeight.Regular, Enum.FontStyle.Normal),
+		BackgroundColor3 = colors.Gray,
+		BackgroundTransparency = 0.5,
+		BorderSizePixel = 0,
+		TextColor3 = colors.White,
+		TextStrokeColor3 = colors.Black,
+		TextScaled = true,
+		PlaceholderText = "Enter...",
+		ClearTextOnFocus = false,
+	}
+}
+
+local function UICorner(parent)
+	local uiCorner = Instance.new('UICorner')
+	uiCorner.CornerRadius = UDim.new(0, 5)
+	uiCorner.Parent = parent
+	return uiCorner
+end
+
+local function UIStroke(parent)
+	local uiStroke = Instance.new('UIStroke')
+	uiStroke.Color = Color3.fromRGB(255,255,255)
+	uiStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+	uiStroke.Parent = parent
+	return uiStroke
+end
+
+local function UIListLayout(parent)
+	local uiListLayout = Instance.new('UIListLayout')
+	uiListLayout.Padding = UDim.new(0, 3)
+	uiListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+	uiListLayout.Parent = parent
+	return uiListLayout
+end
+
+local function UIPadding(parent, num)
+	local uiPadding = Instance.new('UIPadding')
+	uiPadding.PaddingTop = UDim.new(0, num)
+	uiPadding.PaddingLeft = UDim.new(0, num)
+	uiPadding.PaddingRight = UDim.new(0, num)
+	uiPadding.PaddingBottom = UDim.new(0, num)
+	uiPadding.Parent = parent
+	return uiPadding
+end
+
+local function ApplyTheme(instance, themeName)
+	local theme = themes[themeName]
+	if not theme then return end
+
+	for property, value in pairs(theme) do
+		if pcall(function() return instance[property] end) then
+			instance[property] = value
+		end
+	end
+end
+
+function CHEAT.Hub(Name)
+	local toggle = true
+	local mouse = userInputService.MouseIconEnabled
+	if not coreGui:FindFirstChild(Name..'_'..game:GetService('Players').LocalPlayer.UserId) then
+		local Hub = Instance.new('ScreenGui', coreGui)
+		Hub.Name = Name..'_'..game:GetService('Players').LocalPlayer.UserId
+		Hub.IgnoreGuiInset = true
+		Hub.ResetOnSpawn = false
+		Hub.DisplayOrder = math.huge - 1
+
+		local ShowMouse = Instance.new('TextButton', Hub)
+		ShowMouse.Position = UDim2.new(0, 0, 0, 0)
+		ShowMouse.Size = UDim2.new(0, 0, 0, 0)
+		ShowMouse.Active = true
+		ShowMouse.Modal = true
+		ShowMouse.MaxVisibleGraphemes = 0
+
+		local Open = Instance.new('TextButton', Hub)
+		Open.Position = UDim2.new(0.5, 0, 0, 0)
+		Open.Size = UDim2.new(0, 40, 0, 40)
+		Open.Active = true
+		Open.Draggable = true
+		Open.MaxVisibleGraphemes = 0
+		Open.Visible = false
+
+		local Back = Instance.new('ImageLabel', Hub)
+		Back.Position = UDim2.new(0.296, 0, 0.053, 0)
+		Back.Size = UDim2.new(0, 300, 0, 350)
+		Back.Image = 'rbxassetid://96488463895972'
+		Back.Active = true
+		Back.Draggable = true
+
+		local TopPanel = Instance.new('Frame', Back)
+		TopPanel.Size = UDim2.new(0, 300, 0, 30)
+		TopPanel.BackgroundTransparency = 1
+
+		local Close = Instance.new('TextButton', TopPanel)
+		Close.Position = UDim2.new(0.9, 0, 0, 0)
+		Close.Size = UDim2.new(0, 30, 0, 30)
+		Close.FontFace.Bold = true
+		Close.Text = 'X'
+
+		local Title = Instance.new('TextLabel', TopPanel)
+		Title.Position = UDim2.new(0.02, 0, 0, 0)
+		Title.Size = UDim2.new(0, 200, 0, 30)
+		Title.TextXAlignment = Enum.TextXAlignment.Left
+		Title.Text = Name
+
+		local List_Sections = Instance.new('ScrollingFrame', Back)
+		List_Sections.Position = UDim2.new(0, 0, 0.086, 0)
+		List_Sections.Size = UDim2.new(0, 300, 0, 45)
+		UIPadding(List_Sections, 3)
+		local FolderFunctions = Instance.new('Folder', Back)
+
+		ApplyTheme(Back, Back.ClassName)
+		ApplyTheme(Title, Title.ClassName)
+		ApplyTheme(Close, Close.ClassName)
+		ApplyTheme(Open, Open.ClassName)
+		ApplyTheme(List_Sections, List_Sections.ClassName)
+
+		Title.BackgroundTransparency = 1
+		Close.BackgroundTransparency = 1
+		List_Sections.AutomaticCanvasSize = Enum.AutomaticSize.X
+		List_Sections.ScrollingDirection = Enum.ScrollingDirection.X
+
+		local list = UIListLayout(List_Sections)
+		list.FillDirection = Enum.FillDirection.Horizontal
+		list.ItemLineAlignment = Enum.ItemLineAlignment.Center
+		list.VerticalAlignment = Enum.VerticalAlignment.Center
+
+		UICorner(Back)
+		UICorner(Close)
+		UICorner(Open).CornerRadius = UDim.new(0, 999)
+		UICorner(TopPanel)
+
+		UIStroke(Back)
+		UIStroke(Close)
+
+		UIStroke(Open)
+		UIStroke(TopPanel)
+
+		local function hide()
+			toggle = not toggle
+			Back.Visible = toggle
+			Open.Visible = not toggle
+			ShowMouse.Visible = toggle
+			if mouse == true then return end
+			print(1)
+			userInputService.MouseIconEnabled = toggle
+		end
+
+		Open.MouseButton1Click:Connect(hide)
+		Close.MouseButton1Click:Connect(hide)
+		userInputService.InputBegan:Connect(function(input, process)
+			if process then return end
+			if input.KeyCode == Enum.KeyCode.K then
+				hide()
+			end            
+		end)
+
+		local Sections = {}
+
+		function Sections.Section(name, color)
+			if color == nil then
+				color = colors.Gray
+			end
+			local order = 0
+			local SectionButton = Instance.new('TextButton', List_Sections)
+			SectionButton.Size = UDim2.new(0, 45, 0, 45)
+			SectionButton.Text = name
+
+			local SectionFunctions = Instance.new('ScrollingFrame', FolderFunctions)
+			SectionFunctions.Position = UDim2.new(0, 0, 0.231, 0)
+			SectionFunctions.Size = UDim2.new(0, 300, 0, 260)
+			SectionFunctions.Visible = false
+			ApplyTheme(SectionButton, SectionButton.ClassName)
+			ApplyTheme(SectionFunctions, SectionFunctions.ClassName)
+
+			local list = UIListLayout(SectionFunctions)
+			list.FillDirection = Enum.FillDirection.Vertical
+
+			UIPadding(SectionFunctions, 2)
+			SectionButton.BackgroundColor3 = color
+			SectionFunctions.AutomaticCanvasSize = Enum.AutomaticSize.Y
+			SectionFunctions.ScrollingDirection = Enum.ScrollingDirection.Y
+			UICorner(SectionButton)
+			SectionButton.MouseButton1Click:Connect(function()
+				for _, v in pairs(FolderFunctions:GetChildren()) do
+					if v ~= SectionFunctions then
+						v.Visible = false
+					end
+				end
+				SectionFunctions.Visible = not SectionFunctions.Visible
+			end)
+
+			local Debirs = {}
+
+			function Debirs.Title(name)
+				order += 1
+				local Title = Instance.new('TextLabel', SectionFunctions)
+				Title.Size = UDim2.new(0, 300, 0, 20)
+				Title.Text = name
+				Title.LayoutOrder = order
+
+				ApplyTheme(Title, Title.ClassName)
+				UICorner(Title)
+			end
+
+			function Debirs.Active(name, funct)
+				order += 1
+				local Active = Instance.new('TextButton', SectionFunctions)
+				Active.Size = UDim2.new(0, 300, 0, 45)
+				Active.LayoutOrder = order
+				Active.MaxVisibleGraphemes = 0
+
+				local Check = Instance.new('Frame', Active)
+				Check.Size = UDim2.new(0, 15, 0, 15)
+				Check.Position = UDim2.new(0.950, 0, 0, 0)
+
+				local Title = Instance.new('TextLabel', Active)
+				Title.Size = UDim2.new(0, 175, 0, 35)
+				Title.Position = UDim2.new(0.014, 0, 0.111, 0)
+				Title.Text = name
+				Title.TextXAlignment = Enum.TextXAlignment.Left
+
+				ApplyTheme(Active, Active.ClassName)
+				ApplyTheme(Check, Title.ClassName)
+				ApplyTheme(Title, Title.ClassName)
+				UICorner(Active)
+				UICorner(Check)
+
+				Check.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+				Title.BackgroundTransparency = 1
+				local success, err = pcall(function()
+					Active.MouseButton1Click:Connect(function()
+						tweenService:Create(Check, TweenInfo.new(0.15), {BackgroundColor3 = Color3.fromRGB(85, 255, 0)}):Play()
+						funct()
+						wait(0.15)
+						tweenService:Create(Check, TweenInfo.new(0.15), {BackgroundColor3 = Color3.fromRGB(255, 0, 0)}):Play()
+					end)
+				end)
+			end
+
+			function Debirs.Toggle(name, funct)
+				order += 1
+				local Active = Instance.new('TextButton', SectionFunctions)
+				Active.Size = UDim2.new(0, 300, 0, 45)
+				Active.LayoutOrder = order
+				Active.MaxVisibleGraphemes = 0
+
+				local Check = Instance.new('Frame', Active)
+				Check.Size = UDim2.new(0, 15, 0, 15)
+				Check.Position = UDim2.new(0.950, 0, 0, 0)
+
+				local Title = Instance.new('TextLabel', Active)
+				Title.Size = UDim2.new(0, 175, 0, 35)
+				Title.Position = UDim2.new(0.014, 0, 0.111, 0)
+				Title.Text = name
+				Title.TextXAlignment = Enum.TextXAlignment.Left
+
+				ApplyTheme(Active, Active.ClassName)
+				ApplyTheme(Check, Title.ClassName)
+				ApplyTheme(Title, Title.ClassName)
+				UICorner(Active)
+				UICorner(Check)
+				Check.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+				Title.BackgroundTransparency = 1
+
+				local toggleState = false
+				local connection = nil
+				local success, err = pcall(function()
+					Active.MouseButton1Click:Connect(function()
+						if connection then
+							connection:Disconnect()
+							connection = nil
+							toggleState = false
+							funct(toggleState)
+							tweenService:Create(Check, TweenInfo.new(0.25), {BackgroundColor3 = Color3.fromRGB(255, 0, 0)}):Play()
+							return
+						end
+
+						local success, err = pcall(function()
+							toggleState = true
+							connection = runService.Heartbeat:Connect(function()
+								funct(toggleState)
+							end)
+							tweenService:Create(Check, TweenInfo.new(0.25), {BackgroundColor3 = Color3.fromRGB(85, 255, 0)}):Play()
+						end)
+
+						if not success then
+							warn("Failed to connect:", err)
+						end
+					end)
+				end)
+			end
+
+			function Debirs.ActiveB(name, funct)
+				order += 1
+				local Active = Instance.new('TextButton', SectionFunctions)
+				Active.Size = UDim2.new(0, 300, 0, 45)
+				Active.LayoutOrder = order
+				Active.MaxVisibleGraphemes = 0
+
+				local Check = Instance.new('Frame', Active)
+				Check.Size = UDim2.new(0, 15, 0, 15)
+				Check.Position = UDim2.new(0.950, 0, 0, 0)
+
+				local Box = Instance.new('TextBox', Active)
+				Box.Size = UDim2.new(0, 90, 0, 35)
+				Box.Position = UDim2.new(0.625, 0, 0.111, 0)
+				Box.Text = ''
+
+				local Title = Instance.new('TextLabel', Active)
+				Title.Size = UDim2.new(0, 175, 0, 35)
+				Title.Position = UDim2.new(0.014, 0, 0.111, 0)
+				Title.Text = name
+				Title.TextXAlignment = Enum.TextXAlignment.Left
+
+				ApplyTheme(Active, Active.ClassName)
+				ApplyTheme(Check, Title.ClassName)
+				ApplyTheme(Box, Box.ClassName)
+				ApplyTheme(Title, Title.ClassName)
+				UICorner(Active)
+				UICorner(Box)
+				UICorner(Check)
+				Check.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+				Title.BackgroundTransparency = 1
+
+				local toggleState = false
+				local connection = nil
+
+				local success, err = pcall(function()
+					Active.MouseButton1Click:Connect(function()
+						if Box.Text == '' then return end
+						tweenService:Create(Check, TweenInfo.new(0.15), {BackgroundColor3 = Color3.fromRGB(85, 255, 0)}):Play()
+						funct(funct(Box.Text))
+						wait(0.15)
+						tweenService:Create(Check, TweenInfo.new(0.15), {BackgroundColor3 = Color3.fromRGB(255, 0, 0)}):Play()
+					end)
+				end)
+			end
+
+			function Debirs.ToggleB(name, funct)
+				order += 1
+				local Active = Instance.new('TextButton', SectionFunctions)
+				Active.Size = UDim2.new(0, 300, 0, 45)
+				Active.LayoutOrder = order
+				Active.MaxVisibleGraphemes = 0
+
+				local Check = Instance.new('Frame', Active)
+				Check.Size = UDim2.new(0, 15, 0, 15)
+				Check.Position = UDim2.new(0.950, 0, 0, 0)
+
+				local Box = Instance.new('TextBox', Active)
+				Box.Size = UDim2.new(0, 90, 0, 35)
+				Box.Position = UDim2.new(0.625, 0, 0.111, 0)
+				Box.Text = ''
+
+				local Title = Instance.new('TextLabel', Active)
+				Title.Size = UDim2.new(0, 175, 0, 35)
+				Title.Position = UDim2.new(0.014, 0, 0.111, 0)
+				Title.Text = name
+				Title.TextXAlignment = Enum.TextXAlignment.Left
+
+				ApplyTheme(Active, Active.ClassName)
+				ApplyTheme(Check, Title.ClassName)
+				ApplyTheme(Box, Box.ClassName)
+				ApplyTheme(Title, Title.ClassName)
+				UICorner(Active)
+				UICorner(Box)
+				UICorner(Check)
+				Check.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+				Title.BackgroundTransparency = 1
+
+				local toggleState = false
+				local connection = nil
+				local success, err = pcall(function()
+					Active.MouseButton1Click:Connect(function()
+						if Box.Text == '' then return end
+						if connection then
+							connection:Disconnect()
+							connection = nil
+							toggleState = false
+							funct(toggleState)
+							tweenService:Create(Check, TweenInfo.new(0.25), {BackgroundColor3 = Color3.fromRGB(255, 0, 0)}):Play()
+							return
+						end
+
+						local success, err = pcall(function()
+							toggleState = true
+							connection = runService.Heartbeat:Connect(function()
+								funct(toggleState, Box.Text)
+							end)
+							tweenService:Create(Check, TweenInfo.new(0.25), {BackgroundColor3 = Color3.fromRGB(85, 255, 0)}):Play()
+						end)
+
+						if not success then
+							warn("Failed to connect:", err)
+						end
+					end)
+				end)
+			end
+
+			function Debirs.BindActive(name, funct)
+				order += 1
+				local bind = nil  -- Явная инициализация переменной
+				local Active = Instance.new('TextButton', SectionFunctions)
+				Active.Size = UDim2.new(0, 300, 0, 45)
+				Active.LayoutOrder = order
+				Active.MaxVisibleGraphemes = 0
+
+				local Check = Instance.new('Frame', Active)
+				Check.Size = UDim2.new(0, 15, 0, 15)
+				Check.Position = UDim2.new(0.950, 0, 0, 0)
+
+				local Box = Instance.new('TextLabel', Active)
+				Box.Size = UDim2.new(0, 50, 0, 35)
+				Box.Position = UDim2.new(0.692, 0, 0.111, 0)
+				Box.Text = '...'
+
+				local Title = Instance.new('TextLabel', Active)
+				Title.Size = UDim2.new(0, 175, 0, 35)
+				Title.Position = UDim2.new(0.014, 0, 0.111, 0)
+				Title.Text = name
+				Title.TextXAlignment = Enum.TextXAlignment.Left
+
+				ApplyTheme(Active, Active.ClassName)
+				ApplyTheme(Check, Title.ClassName)
+				ApplyTheme(Box, Box.ClassName)
+				ApplyTheme(Title, Title.ClassName)
+				UICorner(Active)
+				UICorner(Box)
+				UICorner(Check)
+				Check.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+				Title.BackgroundTransparency = 1
+
+				local toggleState = false
+				local connection = nil
+
+				local success, err = pcall(function()
+					Active.MouseButton1Click:Connect(function()
+						if not bind then
+							tweenService:Create(Check, TweenInfo.new(0.25), {BackgroundColor3 = Color3.fromRGB(85, 255, 0)}):Play()
+							Box.Text = "Press key..."
+
+							-- Временное соединение для привязки клавиши
+							local connection
+							connection = userInputService.InputBegan:Connect(function(input, processed)
+								if processed then return end
+
+								-- Отписываемся после первой нажатой клавиши
+								if connection then
+									connection:Disconnect()
+									connection = nil
+								end
+
+								bind = input.KeyCode
+								Box.Text = bind.Name
+							end)
+						else
+							bind = nil
+							Box.Text = '...'
+							tweenService:Create(Check, TweenInfo.new(0.25), {BackgroundColor3 = Color3.fromRGB(255, 0, 0)}):Play()
+						end
+					end)
+
+					-- Постоянный обработчик ввода для выполнения функции
+					userInputService.InputBegan:Connect(function(input, processed)
+						if processed or not bind or input.KeyCode ~= bind then return end
+						funct()  -- Вызов целевой функции
+					end)
+				end)
+			end
+
+			function Debirs.BindToggle(name, funct)
+				order += 1
+				local bind = nil
+				local toggleState = false
+				local connection = nil
+				local running = false
+
+				-- Создание основных элементов GUI
+				local Active = Instance.new('TextButton', SectionFunctions)
+				Active.Size = UDim2.new(0, 300, 0, 45)
+				Active.LayoutOrder = order
+				Active.AutoButtonColor = false
+				Active.Text = ""
+
+				local Check = Instance.new('Frame', Active)
+				Check.Size = UDim2.new(0, 15, 0, 15)
+				Check.Position = UDim2.new(0.950, 0, 0, 0)
+
+
+				local Box = Instance.new('TextLabel', Active)
+				Box.Size = UDim2.new(0, 50, 0, 35)
+				Box.Position = UDim2.new(0.692, 0, 0.111, 0)
+				Box.Text = '...'
+				Box.TextSize = 12
+				Box.BackgroundTransparency = 0.8
+
+				local Title = Instance.new('TextLabel', Active)
+				Title.Size = UDim2.new(0, 175, 0, 35)
+				Title.Position = UDim2.new(0.014, 0, 0.111, 0)
+				Title.Text = name
+				Title.TextXAlignment = Enum.TextXAlignment.Left
+
+				ApplyTheme(Active, Active.ClassName)
+				ApplyTheme(Check, Title.ClassName)
+				ApplyTheme(Box, Box.ClassName)
+				ApplyTheme(Title, Title.ClassName)
+				UICorner(Active)
+				UICorner(Box)
+				UICorner(Check)
+				Check.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+				Title.BackgroundTransparency = 1
+
+				-- Функция для запуска/остановки цикла
+				local function toggleLoop()
+					running = not running
+
+					if running then
+						tweenService:Create(Check, TweenInfo.new(0.2), {BackgroundColor3 = Color3.fromRGB(0, 255, 0)}):Play()
+
+						-- Запускаем бесконечный цикл
+						connection = runService.Heartbeat:Connect(function()
+							funct(true)  -- Передаем состояние и время между кадрами
+						end)
+					else
+						tweenService:Create(Check, TweenInfo.new(0.2), {BackgroundColor3 = Color3.fromRGB(255, 0, 0)}):Play()
+						Box.Text = bind and bind.Name or '...'
+
+						-- Останавливаем цикл
+						if connection then
+							connection:Disconnect()
+							connection = nil
+						end
+						funct(false)  -- Сообщаем о остановке
+					end
+				end
+
+				-- Обработчик клика для привязки клавиши
+				Active.MouseButton1Click:Connect(function()
+					if not bind then
+						Box.Text = "Press key..."
+						local tempConnection
+						tempConnection = userInputService.InputBegan:Connect(function(input, processed)
+							if processed then return end
+
+							bind = input.KeyCode
+							Box.Text = bind.Name
+
+							if tempConnection then
+								tempConnection:Disconnect()
+							end
+						end)
+					else
+						bind = nil
+						Box.Text = '...'
+						if running then
+							toggleLoop()  -- Автоматически останавливаем при сбросе бинда
+						end
+					end
+				end)
+
+				-- Обработчик нажатия привязанной клавиши
+				userInputService.InputBegan:Connect(function(input, processed)
+					if processed or not bind or input.KeyCode ~= bind then return end
+					toggleLoop()
+				end)
+			end
+
+			return Debirs
+		end
+
+		return Sections
+	else
+		coreGui:FindFirstChild(Name..'_'..game:GetService('Players').LocalPlayer.UserId):Destroy()
+		return CHEAT.Hub(Name)
+	end
+end
+
+return CHEAT
