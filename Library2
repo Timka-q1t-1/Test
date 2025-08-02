@@ -36,6 +36,15 @@ local defaultTheme = {
 		TextColor3 = Color3.fromRGB(255,255,255),
 		TextScaled = true
 	},
+	TextBox = {
+		BackgroundColor3 = Color3.fromRGB(35, 35, 35),
+		BackgroundTransparency = 0.5,
+		Font = Enum.Font.PatrickHand,
+		RichText = true,
+		TextColor3 = Color3.fromRGB(255,255,255),
+		PlaceholderColor3 = Color3.fromRGB(180,180,180),
+		TextScaled = true
+	},
 	UICorner = {
 		CornerRadius = UDim.new(0, 3)
 	},
@@ -58,7 +67,7 @@ local defaultTheme = {
 
 local function CreateUIelement(element)
 	if not element then return false end
-	
+
 	local elementReturn = Instance.new(element)
 	for s, v in pairs(defaultTheme) do
 		if s == elementReturn.ClassName then
@@ -101,6 +110,21 @@ local function OnAnimationClick(model, color1)
 	end
 end
 
+local function GenerationID(model)
+	local id = {}
+	for i = 1, 10 do
+		id[i] = math.random(0,9)
+	end
+	return table.concat(id)
+end
+
+local function StopForDestroyng(parent, config)
+	if parent and parent.Parent then return end
+	if not config.Connect then return end
+	config.Connect:Disconnect()
+	config.Connect = nil
+end
+
 local function OffAnimationClick(model, color1)
 	local tweenInfo = TweenInfo.new(0.25)
 	for _, stroke in pairs(model:GetDescendants()) do
@@ -113,13 +137,14 @@ end
 
 function MyMenu.Hub(name)
 	if #name > 35 then return end
-	local player = game:GetService('Players').LocalPlayer
+	local players = game:GetService('Players')
+	local player = players.LocalPlayer
 	local gui = player.PlayerGui
-	
+
 	local check = CheckGui(player, gui)
 	if not check then
 		--[Cachering]
-		local ScreenGui = CreateUIelement('ScreenGui')
+		local ScreenGui:ScreenGui = CreateUIelement('ScreenGui')
 		local HubMenu = CreateUIelement('Frame')
 		local HeadPanel = CreateUIelement('Frame')
 		local Close2 = CreateUIelement('TextButton')
@@ -129,12 +154,12 @@ function MyMenu.Hub(name)
 		local List1 = CreateUIelement('ScrollingFrame')
 		local FunctionPanel = CreateUIelement('Frame')
 		local Close1 = CreateUIelement('TextButton')
-		
+
 		--[Helpers]
 		local function ToggleGui()
 			HubMenu.Visible = not HubMenu.Visible
 		end
-		
+
 		--[Re-creation]
 		ScreenGui:SetAttribute(`{player.UserId}_Expert`, true)
 		Close1.Position = UDim2.fromScale(0.473, 0.01)
@@ -197,7 +222,7 @@ function MyMenu.Hub(name)
 		Close2.Parent = HeadPanel
 		Setting.Parent = HeadPanel
 		Title.Parent = HeadPanel
-		
+
 		--[Connections]
 		Close1.MouseButton1Click:Connect(ToggleGui)
 		Close2.MouseButton1Click:Connect(ToggleGui)
@@ -206,21 +231,21 @@ function MyMenu.Hub(name)
 				ToggleGui()
 			end
 		end)
-		
+
 		--[Functions]
 		local Section = {}
-		
+
 		function Section.Section(name)
 			local functionSection = CreateUIelement('ScrollingFrame')
 			local section = CreateUIelement('TextButton')
 			local title = CreateUIelement('TextLabel')
-			
+
 			functionSection.Visible = false
 			functionSection.Position = UDim2.fromScale(0, 0)
 			functionSection.Size = UDim2.fromScale(1, 1)
 			functionSection.AutomaticCanvasSize = Enum.AutomaticSize.Y
 			functionSection.ScrollingDirection = Enum.ScrollingDirection.Y
-			
+
 			section.Size = UDim2.fromScale(0.206, 1)
 			section.BackgroundTransparency = 0.5
 			section.MaxVisibleGraphemes = 0
@@ -232,35 +257,43 @@ function MyMenu.Hub(name)
 			CreateUIelement('UICorner').Parent = section
 			CreateUIelement('UIStroke').Parent = section
 			CreateUIelement('UIListLayout').Parent = functionSection
-			
+
 			functionSection.Parent = FunctionPanel
 			section.Parent = List1
 			title.Parent = section
-			
+
 			section.MouseButton1Click:Connect(function()
 				CheckSection(functionSection, FunctionPanel)
 			end)
-			
+
 			local Debris = {}
-			
+
 			function Debris.Title(name)
+				local id = GenerationID(name)
 				local frame = CreateUIelement('Frame')
 				local title = CreateUIelement('TextLabel')
 				local stroke = CreateUIelement('UIStroke')
 				local corner = CreateUIelement('UICorner')
 				
+				local config = {
+					Live = true,
+					LastActive = os.clock(),
+					ID = `Title_{name}-{id}`,
+				}
+
 				frame.Size = UDim2.fromScale(1, 0.077)
 				title.Position = UDim2.fromScale(0.062, 0.1)
 				title.Size = UDim2.fromScale(0.876, 0.8)
 				title.Text = `|               {name}               |`
-				
+
 				frame.Parent = functionSection
 				title.Parent = frame
 				stroke.Parent = frame
 				corner.Parent = frame
 			end
-			
+
 			function Debris.Active(name, callback)
+				local id = GenerationID(name)
 				local frame = CreateUIelement('Frame')
 				local title = CreateUIelement('TextLabel')
 				local button = CreateUIelement('TextButton')
@@ -272,6 +305,69 @@ function MyMenu.Hub(name)
 				local corner1 = CreateUIelement('UICorner')
 				local stroke2 = CreateUIelement('UIStroke')
 				local corner2 = CreateUIelement('UICorner')
+
+				local config = {
+					Live = true,
+					LastActive = os.clock(),
+					ID = `Active_{name}-{id}`,
+				}
+				
+				frame.Size = UDim2.fromScale(1, 0.138)
+				button.Position = UDim2.fromScale(0.907, 0)
+				button.Size = UDim2.fromScale(0.093, 1)
+				button.MaxVisibleGraphemes = 0
+				title1.Position = UDim2.fromScale(0.05, 0.05)
+				title1.Size = UDim2.fromScale(0.889, 0.889)
+				title1.Text = `!`
+				image.Position = UDim2.fromScale(0, 0)
+				image.Size = UDim2.fromScale(0.093, 1)
+				title.Position = UDim2.fromScale(0.107, 0.122)
+				title.Size = UDim2.fromScale(0.443, 0.756)
+				title.Text = ` {name}`
+				title.TextXAlignment = Enum.TextXAlignment.Left
+				frame.Parent = functionSection
+				title.Parent = frame
+				title1.Parent = button
+				button.Parent = frame
+				image.Parent = frame
+				stroke.Parent = frame
+				corner.Parent = frame
+				stroke1.Parent = button
+				corner1.Parent = button
+				stroke2.Parent = image
+				corner2.Parent = image
+
+				button.MouseButton1Click:Connect(function()
+					OnAnimationClick(frame, Color3.fromRGB(0, 255, 0))
+					callback()
+					wait(0.25)
+					OffAnimationClick(frame, Color3.fromRGB(255, 255, 255))
+				end)
+				return frame, config
+			end
+			
+			function Debris.Toggle(name, callback)
+				local id = GenerationID(name)
+				local frame = CreateUIelement('Frame')
+				local title = CreateUIelement('TextLabel')
+				local button:TextButton = CreateUIelement('TextButton')
+				local title1 = CreateUIelement('TextLabel')
+				local image = CreateUIelement('ImageLabel')
+				local stroke = CreateUIelement('UIStroke')
+				local corner = CreateUIelement('UICorner')
+				local stroke1 = CreateUIelement('UIStroke')
+				local corner1 = CreateUIelement('UICorner')
+				local stroke2 = CreateUIelement('UIStroke')
+				local corner2 = CreateUIelement('UICorner')
+
+				local config = {
+					Live = true,
+					Connect = nil,
+					Toggle = false,
+					LastActive = os.clock(),
+					ID = `Toggle_{name}-{id}` 
+				}
+
 				frame.Size = UDim2.fromScale(1, 0.138)
 				button.Position = UDim2.fromScale(0.907, 0)
 				button.Size = UDim2.fromScale(0.093, 1)
@@ -298,16 +394,120 @@ function MyMenu.Hub(name)
 				corner2.Parent = image
 				
 				button.MouseButton1Click:Connect(function()
-					OnAnimationClick(frame, Color3.fromRGB(0, 255, 0))
-					callback()
-					wait(0.25)
-					OffAnimationClick(frame, Color3.fromRGB(255, 255, 255))
+					if os.clock() - config.LastActive > 0.005 then
+						config.LastActive = os.clock()
+						if config.Toggle == false then
+							OnAnimationClick(frame, Color3.fromRGB(0, 255, 0))
+							config.Toggle = true
+							config.Connect = runService.Heartbeat:Connect(function()
+								callback()
+							end)
+						else
+							if config.Connect then
+								config.Connect:Disconnect()
+								config.Connect = nil
+							end
+							config.Toggle = false
+							OffAnimationClick(frame, Color3.fromRGB(255, 255, 255))
+						end
+					end
 				end)
+				
+				runService.Heartbeat:Connect(function()
+					StopForDestroyng(frame, config)
+				end)
+				return frame, config
 			end
 			
+			function Debris.ActiveBox(name, count, callback)
+				if not count then return end
+				
+				local id = GenerationID(name)
+				local frame = CreateUIelement('Frame')
+				local title = CreateUIelement('TextLabel')
+				local frame1 = CreateUIelement('Frame')
+				local listBox = CreateUIelement('ScrollingFrame')
+				local button = CreateUIelement('TextButton')
+				local title1 = CreateUIelement('TextLabel')
+				local image = CreateUIelement('ImageLabel')
+				local stroke = CreateUIelement('UIStroke')
+				local corner = CreateUIelement('UICorner')
+				local stroke1 = CreateUIelement('UIStroke')
+				local corner1 = CreateUIelement('UICorner')
+				local stroke2 = CreateUIelement('UIStroke')
+				local corner2 = CreateUIelement('UICorner')
+				local stroke3 = CreateUIelement('UIStroke')
+				local corner3 = CreateUIelement('UICorner')
+				local list1 = CreateUIelement('UIListLayout')
+				
+				local config = {
+					Boxes = {}, 
+					Live = true,
+					LastActive = os.clock(),
+					ID = `ActiveBox_{name}-{id}`,
+				}
+				
+				for i = 1, count do
+					local box = CreateUIelement('TextBox')
+					box.PlaceholderText = 'num'
+					box.Text = ''
+					box.Size = UDim2.fromScale(0.5, 1)
+					box.Parent = listBox
+					table.insert(config.Boxes, box)
+				end
+
+				frame.Size = UDim2.fromScale(1, 0.138)
+				frame1.Position = UDim2.fromScale(0.559, 0.111)
+				frame1.Size = UDim2.fromScale(0.33, 0.756)
+				button.Position = UDim2.fromScale(0.907, 0)
+				button.Size = UDim2.fromScale(0.093, 1)
+				button.MaxVisibleGraphemes = 0
+				listBox.Position = UDim2.fromScale(0, 0)
+				listBox.Size = UDim2.fromScale(1, 1)
+				listBox.AutomaticCanvasSize = Enum.AutomaticSize.X
+				listBox.ScrollingDirection = Enum.ScrollingDirection.X
+				title1.Position = UDim2.fromScale(0.05, 0.05)
+				title1.Size = UDim2.fromScale(0.889, 0.889)
+				title1.Text = `!`
+				image.Position = UDim2.fromScale(0, 0)
+				image.Size = UDim2.fromScale(0.093, 1)
+				title.Position = UDim2.fromScale(0.107, 0.122)
+				title.Size = UDim2.fromScale(0.443, 0.756)
+				title.Text = ` {name}`
+				title.TextXAlignment = Enum.TextXAlignment.Left
+				list1.FillDirection = Enum.FillDirection.Horizontal
+				frame.Parent = functionSection
+				listBox.Parent = frame1
+				frame1.Parent = frame
+				title.Parent = frame
+				title1.Parent = button
+				button.Parent = frame
+				image.Parent = frame
+				stroke.Parent = frame
+				corner.Parent = frame
+				stroke1.Parent = button
+				corner1.Parent = button
+				stroke2.Parent = image
+				corner2.Parent = image
+				stroke3.Parent = frame1
+				corner3.Parent = frame1
+				list1.Parent = listBox
+
+				button.MouseButton1Click:Connect(function()
+					if os.clock() - config.LastActive > 0.0005 then
+						config.LastActive = os.clock()
+						OnAnimationClick(frame, Color3.fromRGB(0, 255, 0))
+						callback(config.Boxes)
+						wait(0.25)
+						OffAnimationClick(frame, Color3.fromRGB(255, 255, 255))
+					end
+				end)
+				return frame, config
+			end
+
 			return Debris
 		end
-		
+
 		return Section
 	end
 end
